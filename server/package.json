@@ -1,0 +1,42 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Server to access datamodel for billing application",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hraverkar/billing-application.git"
+  },
+  "keywords": [
+    "Server",
+    "billing",
+    "Application",
+    "Database",
+    "datamodel"
+  ],
+  "author": "Harshal Raverkar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hraverkar/billing-application/issues"
+  },
+  "homepage": "https://github.com/hraverkar/billing-application#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "helmet": "^3.21.3",
+    "lodash": "^4.17.15",
+    "moment": "^2.24.0",
+    "morgan": "^1.9.1",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "pg": "^7.18.2",
+    "request": "^2.88.2",
+    "sequelize": "^5.21.5",
+    "uuid": "^7.0.2"
+  }
+}
