@@ -22,7 +22,7 @@ module.exports = function(sequelize,config) {
             );
             return;
           }
-          res.send(result);
+          res.send({result, message:"OK"});
         })
         .catch(error =>
           ErrorHandler(
@@ -39,6 +39,10 @@ module.exports = function(sequelize,config) {
 
   function ErrorHandler(userMessage, res, error) {
     res.send({ message: userMessage });
+  }
+
+  function Cleanup(res) {
+    if (!res.headersSent) { res.send({ message: 'Server error authenticating user login, try again !!' }); }
   }
   return loginRouter;
 };
