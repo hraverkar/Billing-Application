@@ -17,7 +17,7 @@ module.exports = function(sequelize,config) {
         .then(function(result) {
           if (result === null) {
             ErrorHandler(
-              "Incorrect email or password, or user is not authorized !!",
+              "Incorrect User Name or password, or user is not authorized !!",
               res,
             );
             return;
