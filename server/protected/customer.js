@@ -2,7 +2,7 @@ module.exports = function(sequelize) {
   let customerInfoRouter = require("express").Router();
   let customerData = require("../database/customer")(sequelize);
   let itemData = require("../database/item")(sequelize);
-  //const uuid = require('uuid/v4');
+  const uuid = require("uuid/v4");
 
   customerInfoRouter.post("/", function(req, res) {
     try {
@@ -25,10 +25,11 @@ module.exports = function(sequelize) {
   customerInfoRouter.get("/", function(req, res) {});
 
   function userGroupComboAddition(res, combos) {
+    let customerId = uuid();
     customerData
       .create(
         {
-          customerid: combos[0].customerid,
+          customerid: customerId,
           customername: combos[0].customername,
           customeraddress: combos[0].customeraddress,
           customernumber: combos[0].customernumber,
@@ -38,20 +39,21 @@ module.exports = function(sequelize) {
       )
       .then(result => {
         console.log(result);
+        let itemId = uuid();
         itemData
           .create(
             {
-              itemid: combos[0].itemid,
+              itemid: itemId,
               itemname: combos[0].itemname,
               itemquantity: combos[0].itemquantity,
               itemprice: combos[0].itemprice,
               totalprice: combos[0].totalprice,
-              customerid: combos[0].customerid,
-              username: combos[0].username
+              customerid: customerId,
+              username: "admin"
             },
             { logging: console.log }
           )
-          .then((result) => {
+          .then(result => {
             console.log(result);
             res
               .status(201)

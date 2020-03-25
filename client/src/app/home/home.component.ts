@@ -1,26 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit } from "@angular/core";
+import { PdfMakeWrapper } from "pdfmake-wrapper";
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: "app-home",
+  templateUrl: "./home.component.html",
+  styleUrls: ["./home.component.css"]
 })
 export class HomeComponent implements OnInit {
-  public customerName:string;
-  public customerAdd:string;
-  public customerNum:string;
-  public itemName:string;
-  public itemQuantity:number;
-  public itemPrice:number;
-  public totalPrice:number;
-  constructor() { }
+  public customerName: string;
+  public customerAdd: string;
+  public customerNum: string;
+  public itemName: string;
+  public itemQuantity: number;
+  public itemPrice: number;
+  public totalPrice: number;
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  onCancelClick(){
-    this.customerName=null;
+  onCancelClick() {
+    this.customerName = null;
     this.customerAdd = null;
     this.customerNum = null;
     this.itemName = null;
@@ -29,8 +28,14 @@ export class HomeComponent implements OnInit {
     this.totalPrice = null;
   }
 
-  onPrintClick(){
-    console.log("Hello Harhsl Raverkar")
-  }
+  onPrintClick() {
+    const pdf = new PdfMakeWrapper();
+    pdf.defaultStyle({
+      bold: true,
+      fontSize: 15
+    });
 
+    pdf.add("Hello world!");
+    pdf.create().download();
+  }
 }

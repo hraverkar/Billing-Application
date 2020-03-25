@@ -1,5 +1,8 @@
+
+<div class="header" >
 <app-header></app-header>
-<div>
+</div>
+<div class="matcard">
   <mat-card>
     <mat-card-title>Customer Details</mat-card-title>
     <div class="example-container">
@@ -20,7 +23,8 @@
 
     </div>
   </mat-card>
-
+</div>
+<div class="matcard">
   <mat-card>
     <mat-card-title>Item Details</mat-card-title>
     <div class="example-container">
@@ -28,20 +32,17 @@
         <mat-label>Item Name</mat-label>
         <input matInput [(ngModel)]="itemName" >
       </mat-form-field>
-      <br>
-      <br>
+
       <mat-form-field>
         <mat-label>Item Quantity</mat-label>
         <input matInput [(ngModel)]="itemQuantity" >
       </mat-form-field>
-      <br>
-      <br>
+
       <mat-form-field>
         <mat-label>Item Price</mat-label>
         <input matInput [(ngModel)]="itemPrice" >
       </mat-form-field>
-      <br>
-      <br>
+ 
       <mat-form-field>
         <mat-label>Total Price</mat-label>
         <input matInput [(ngModel)]="totalPrice" >
@@ -50,7 +51,7 @@
   </mat-card>
 </div>
 
-  <div class="example-button-row">
+  <div class="btnLocation">
     <button mat-raised-button color="primary" (click)="onPrintClick()">Print</button>
     <button mat-raised-button color="primary" (click)="onCancelClick()" style="margin-left: 30px;">Cancel</button>
   </div>
