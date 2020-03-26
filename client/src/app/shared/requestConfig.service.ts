@@ -29,4 +29,12 @@ export class RequestConfigService {
       { observe: "response" }
     );
   }
+
+  getGSTIN() {
+    return this.httpClient.get(this.host + '/protected/gstIN');
+  }
+
+  getPAN() {
+    return this.httpClient.get(this.host + '/protected/pan');
+  }
 }
