@@ -4,5 +4,6 @@ module.exports = function (sequelize, config, fs) {
   // unprotected routes field:
   const login = require('./login')(sequelize, config);
   unprotectedRouter.use('/login', login);
+
   return unprotectedRouter;
 }

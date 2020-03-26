@@ -20,4 +20,8 @@ config.domain = 'http://localhost:8080';
 config.logInfo = {'maxsize':10000000,'datePattern':'%d{yyyy-MM-dd hh:mm:ss}','backups':20000};
 
 config.unsecureport = 7272;
+
+config.gstIN ="ABCDE78945";
+
+config.pan ="BVSPR9231E";
 module.exports = config;
