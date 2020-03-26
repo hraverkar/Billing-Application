@@ -4,7 +4,7 @@
 </div>
 <div class="matcard">
   <mat-card>
-    <mat-card-title>Customer Details</mat-card-title>
+    <mat-card-title style="margin-left: 35%;">Customer Details</mat-card-title>
     <div class="example-container">
       <mat-form-field>
         <mat-label>Customer Name</mat-label>
@@ -26,7 +26,7 @@
 </div>
 <div class="matcard">
   <mat-card>
-    <mat-card-title>Item Details</mat-card-title>
+    <mat-card-title style="margin-left: 35%;">Item Details</mat-card-title>
     <div class="example-container">
       <mat-form-field>
         <mat-label>Item Name</mat-label>
@@ -42,16 +42,15 @@
         <mat-label>Item Price</mat-label>
         <input matInput [(ngModel)]="itemPrice" >
       </mat-form-field>
- 
-      <mat-form-field>
-        <mat-label>Total Price</mat-label>
-        <input matInput [(ngModel)]="totalPrice" >
-      </mat-form-field>
     </div>
   </mat-card>
 </div>
 
   <div class="btnLocation">
+    <mat-form-field>
+      <mat-label>Total Price</mat-label>
+      <input matInput readonly [(ngModel)]="itemPrice" >
+    </mat-form-field>
     <button mat-raised-button color="primary" (click)="onPrintClick()">Print</button>
     <button mat-raised-button color="primary" (click)="onCancelClick()" style="margin-left: 30px;">Cancel</button>
   </div>

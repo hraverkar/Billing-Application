@@ -1,5 +1,8 @@
-import { Component, OnInit } from "@angular/core";
-import { PdfMakeWrapper } from "pdfmake-wrapper";
+import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+import { RequestConfigService } from "../shared/requestConfig.service";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: "app-home",
@@ -14,7 +17,12 @@ export class HomeComponent implements OnInit {
   public itemQuantity: number;
   public itemPrice: number;
   public totalPrice: number;
-  constructor() {}
+  public GSTIN: any;
+  public PAN: any;
+  public today = new Date();
+  
+
+  constructor(public requestService: RequestConfigService) {}
 
   ngOnInit(): void {}
 
@@ -29,13 +37,187 @@ export class HomeComponent implements OnInit {
   }
 
   onPrintClick() {
-    const pdf = new PdfMakeWrapper();
-    pdf.defaultStyle({
-      bold: true,
-      fontSize: 15
-    });
+    this.totalPrice = this.itemPrice;
+    const documentDefinition = this.getDocumentDefinition();
+    pdfMake.createPdf(documentDefinition).download(this.today.getTime()+".pdf");
+    this.onCancelClick();
+  }
 
-    pdf.add("Hello world!");
-    pdf.create().download();
+  setGSTIN() {
+    return this.requestService.getGSTIN();
+  }
+
+  setPAN() {
+    return this.requestService.getPAN();
+  }
+
+  getDocumentDefinition() {
+    let  tdate = this.today.getFullYear()+'-'+(this.today.getMonth()+1)+'-'+this.today.getDate();
+    return {
+      content: [
+        {
+          text: "Tax Invoice"
+        },
+        {
+          text: "TextError Technologies",
+          bold: true,
+          fontSize: 20,
+          alignment: "center",
+          margin: [0, 0, 0, 20]
+        },
+        {
+          text:
+            "773,17th B Cross JP Nagar 6th Phase Bangalore, Karnataka - 560078",
+          bold: true,
+          fontSize: 12,
+          alignment: "center",
+          margin: [0, 0, 0, 20]
+        },
+        {
+          text:"Bill To",
+          bold:true,
+          fontSize:12
+        },
+        {
+          margin: [0, 0, 0, 20],
+          columns: [
+            [
+              {
+                text: "Customer Name : " + this.customerName
+              },
+
+              {
+                text: "Customer Address : " + this.customerAdd
+              },
+
+              {
+                text: "Contant No : " + this.customerNum
+              }
+            ],
+            [
+              {
+                text: "Date : " + tdate,
+                alignment: "right",
+              },
+              {
+                text: "Bill No : " +this.today.getTime(),
+                alignment: "right",
+              },
+              {
+                text: "PAN : " + "BVSPR9231E",
+                alignment: "right",
+              },
+              {
+                text: "GSTIN : " + "ABCDE12345",
+                alignment: "right",
+              }
+              //this.getProfilePicObject()
+            ]
+          ]
+        },
+        {
+          margin: [0, 0, 0, 20],
+          columns: [[this.iteminformation()]]
+        },
+        {
+          columns: [
+            [
+              {
+                text: "Total Price : " + this.totalPrice,
+                style: "header"
+              },
+              {
+                text: "All Values are in INR",
+                style: "header"
+              }
+            ]
+          ]
+        },
+        {
+          columns: [
+            [
+              {
+                text: "Signature : ",
+                style: "sign"
+              },
+              {
+                text: "Harshal Raverkar",
+                style: "sign"
+              }
+            ]
+          ]
+        },
+        {
+          columns: [
+            [
+              {
+                text: "Declaration",
+                bold:true
+              },
+              {
+                text:"The goods sold are intended for end user consumption and not for resale."
+              }
+            ]
+          ]
+        }
+      ],
+      styles: {
+        header: {
+          fontSize: 14,
+          bold: true,
+          alignment: "right",
+          decoration: "underline"
+        },
+        name: {
+          fontSize: 16,
+          bold: true
+        },
+        jobTitle: {
+          fontSize: 14,
+          bold: true,
+          italics: true
+        },
+        sign: {
+          margin: [0, 20, 0, 0],
+          alignment: "right",
+          italics: true,
+          fontSize: 14,
+          bold: true,
+          decoration: "underline"
+        },
+        tableHeader: {
+          bold: true
+        },
+        tableSpace: {
+          fontSize: 18,
+          margin: [20, 0, 0, 20]
+        }
+      }
+    };
+  }
+
+  iteminformation() {
+    return {
+      table: {
+        widths: ["*", "*", "*"],
+        body: [
+          [
+            {
+              text: "Name & Description",
+              style: "tableHeader"
+            },
+            {
+              text: "Quantity",
+              style: "tableHeader"
+            },
+            {
+              text: "Price",
+              style: "tableHeader"
+            }
+          ],
+          [this.itemName, this.itemQuantity, this.itemPrice]
+        ]
+      }
+    };
   }
 }
