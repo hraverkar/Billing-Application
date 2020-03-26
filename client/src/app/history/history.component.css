@@ -3,3 +3,31 @@
   background-color: #1976d2;
   color: #f1f1f1;
 }
+
+.matcard {
+  padding-right: 30px;
+  width: 867.8px;
+  top: 5px;
+  right: 0px;
+  bottom: 0px;
+  left: 6px;
+  border-top-width: 0px;
+  border-top-style: solid;
+  border-right-width: 0px;
+  border-right-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-style: solid;
+  padding-left: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  margin-left: 20%;
+  margin-top: 5%;
+}
+
+svg#clouds {
+  position: fixed;
+  bottom: -160px;
+  left: -230px;
+  z-index: -10;
+  width: 1920px;
+}
