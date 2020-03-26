@@ -62,6 +62,7 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatTreeModule } from "@angular/material/tree";
 import { HeaderComponent } from './header/header.component';
+import { HistoryComponent } from './history/history.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { HeaderComponent } from './header/header.component';
     AleartdialogComponent,
     LoginComponent,
     HeaderComponent,
+    HistoryComponent,
   ],
   imports: [
     BrowserModule,
