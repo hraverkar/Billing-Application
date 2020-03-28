@@ -24,4 +24,5 @@ config.unsecureport = 7272;
 config.gstIN ="ABCDE78945";
 
 config.pan ="BVSPR9231E";
+
 module.exports = config;
