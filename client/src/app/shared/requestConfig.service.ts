@@ -22,12 +22,16 @@ export class RequestConfigService {
     });
   }
   // add user group combo - assign userGroupCombo
-  addCustomerInfo(newEntries) {
+  addCustomerInfo(newEntries:any) {
     return this.httpClient.post(
       this.host + "/protected/customer",
       { newEntries },
       { observe: "response" }
     );
+  }
+
+  getCustomerInfo(query?: string) {
+    return this.httpClient.get(this.host + '/protected/customer?' + query);
   }
 
   getGSTIN() {
