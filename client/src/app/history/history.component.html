@@ -5,7 +5,64 @@
 <div class="matcard">
   <mat-card>
     <mat-card-title style="margin-left: 45%;">Search</mat-card-title>
-    
+    <mat-form-field>
+      <mat-label>Customer Name</mat-label>
+      <input matInput [(ngModel)]="customerName">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Customer Address</mat-label>
+      <input matInput [(ngModel)]="customerAddress">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Customer Number</mat-label>
+      <input matInput [(ngModel)]="customerNumber">
+    </mat-form-field>
+    <br>
+    <br>
+    <button mat-raised-button color="primary" style="margin-left: 30px;" (click)="onSearchClick(false)">Search</button>
+    <button mat-raised-button color="primary" style="margin-left: 30px;" (click)="onCancelClick()">Cancel</button>
+  </mat-card>
+</div>
+
+
+<div *ngIf="isShow" class="matcard">
+  <mat-card>
+    <div  *ngIf="dataSource" class="example-container mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="itemname">
+          <th mat-header-cell *matHeaderCellDef> Item Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.itemname}} </td>
+        </ng-container>
+        <ng-container matColumnDef="itemquantity">
+          <th mat-header-cell *matHeaderCellDef> Item Quantity </th>
+          <td mat-cell *matCellDef="let element"> {{element.itemquantity}} </td>
+        </ng-container>
+        <ng-container matColumnDef="itemprice">
+          <th mat-header-cell *matHeaderCellDef> Item Price </th>
+          <td mat-cell *matCellDef="let element"> {{element.itemprice}} </td>
+        </ng-container>
+        <ng-container matColumnDef="totalprice">
+          <th mat-header-cell *matHeaderCellDef> Total Price </th>
+          <td mat-cell *matCellDef="let element"> {{element.totalprice}} </td>
+        </ng-container>
+        <ng-container matColumnDef="customername">
+          <th mat-header-cell *matHeaderCellDef> Customer Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.customername}} </td>
+        </ng-container>
+        <ng-container matColumnDef="customeraddress">
+          <th mat-header-cell *matHeaderCellDef> Customer Address </th>
+          <td mat-cell *matCellDef="let element"> {{element.customeraddress}} </td>
+        </ng-container>
+        <ng-container matColumnDef="customernumber">
+          <th mat-header-cell *matHeaderCellDef> Customer Number </th>
+          <td mat-cell *matCellDef="let element"> {{element.customernumber}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div> 
   </mat-card>
 </div>
 

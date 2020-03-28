@@ -31,3 +31,19 @@ svg#clouds {
   z-index: -10;
   width: 1920px;
 }
+
+.spacer {
+  flex: 1;
+}
+
+table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+th, td {
+  overflow: hidden;
+  width: 100px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
