@@ -1,7 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
+import { Component, OnInit, ChangeDetectionStrategy, Inject } from "@angular/core";
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import { RequestConfigService } from "../shared/requestConfig.service";
+import { MAT_SNACK_BAR_DATA, MatSnackBar } from '@angular/material/snack-bar';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -22,7 +23,10 @@ export class HomeComponent implements OnInit {
   public today = new Date();
   
 
-  constructor(public requestService: RequestConfigService) {}
+  constructor(public requestService: RequestConfigService, 
+    private snackBar: MatSnackBar,
+    @Inject(MAT_SNACK_BAR_DATA) public dataSnackBar: any,
+    ) {}
 
   ngOnInit(): void {}
 
@@ -37,10 +41,30 @@ export class HomeComponent implements OnInit {
   }
 
   onPrintClick() {
+    let userData = [];
+    userData.push({
+      customerName: this.customerName,
+      customerAdd:this.customerAdd,
+      customerNum:this.customerNum,
+      itemName:this.itemName,
+      itemQuantity:this.itemQuantity,
+      itemPrice:this.itemPrice,
+      totalPrice : this.itemPrice
+    });
+    this.requestService.addCustomerInfo(userData).subscribe(this.userStoreResponse.bind(this));
     this.totalPrice = this.itemPrice;
+    
     const documentDefinition = this.getDocumentDefinition();
     pdfMake.createPdf(documentDefinition).download(this.today.getTime()+".pdf");
     this.onCancelClick();
+  }
+
+  userStoreResponse(response: any) {  
+    if(response.status == 201)
+      this.snackBar.open(response.body.message, null, this.dataSnackBar.duration);
+    else{
+      this.snackBar.open(response.body.message, null, this.dataSnackBar.duration);
+    }
   }
 
   setGSTIN() {
