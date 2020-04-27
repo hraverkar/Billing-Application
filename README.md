@@ -1,2 +1,2 @@
 # Billing Application
-Billing Application.
+Billing Application
